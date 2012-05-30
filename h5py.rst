@@ -12,6 +12,9 @@ In eine HDF5-Datei können datasets and groups geschrieben werden. Datasets
 sind "homogene, reguläre Arrays von Daten, vergleichbar einem NumPy-Array".
 Groups sind Container für Datasets und andere Gruppen.
 
+HDF5 empfiehlt sich gegenüber Textdateien, weil das binäre Format weniger
+Platz benötigt. Trotzdem ist HDF5 standardisiert.
+
 Dateien öffnen oder erzeugen
 ============================
 
@@ -28,7 +31,7 @@ Inhalt des Dateisystems auslesen
 
   items = f.items()
 
-gibt eine Liste alle Einträge in ``f`` zurück.
+gibt eine Liste aller Einträge in ``f`` zurück.
 
 Daten lesen
 ===========
