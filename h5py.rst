@@ -22,7 +22,19 @@ Dateien öffnen oder erzeugen
 
   f = h5py.File('myfile.hdf5', 'w')
 
-Erlaubte Modi sind ``a`` (default), ``w`` und ``r``.
+Erlaubte Modi sind:
+
++----+---------------------------------------------------------------------------+
+| r  | Nur lesen, Datei muss exisitieren                                         |
++----+---------------------------------------------------------------------------+
+| r+ | Lesen/schreiben, Datei muss exisitieren                                   |
++----+---------------------------------------------------------------------------+
+| w  | Datei erzeugen, falls existiert, überschreiben (!)                        |
++----+---------------------------------------------------------------------------+
+| w- | Datei erzeugen, Fehler falls Datei exisitiert                             |
++----+---------------------------------------------------------------------------+
+| a  | Falls Datei exisitiert: Lesen/Schreiben; sonst: Datei erzeugen (Standard) |
++----+---------------------------------------------------------------------------+
 
 Inhalt des Dateisystems auslesen
 ================================
@@ -85,7 +97,7 @@ Gruppen
 Gruppen erlauben Struktur::
 
   /    # root
-  
+
       Gruppe1
           Daten1
           Daten2
@@ -121,10 +133,10 @@ Zu Datasets oder Gruppen können Attribute hinterlegt werden (man denke an
 Parameter für eine Rechnung oder gar eine Commit-ID für den Code!)::
 
   ds.attr["parameter1"] = 0.0
-  ds.attr["commitID"] = "1f3fd71320f970e2275da196f8df2e417f620ed6"
+  gr.attr["commitID"] = "1f3fd71320f970e2275da196f8df2e417f620ed6"
 
-Spezielle Themen
-================
+Weitere Themen
+==============
 
 Kompression von Datasets
 ------------------------
@@ -135,9 +147,15 @@ Datasets können komprimiert werden::
                        compression_opts=4)
 
 ``compression_opts`` gibt dabei an, wie stark komprimiert werden soll.
+Mögliche Kompressionsverfahren sind ``gzip``, ``lzf`` (schnell) und ``szip``.
 
-MPI
----
+Beachte: Nachträglich kann ein hdf5-File beispielweise mit dem Tool
+``h5repack`` komprimiert werden, etwa so::
+
+  h5repack -v -f GZIP=4 file.hdf5
+
+Paralles HDF5/MPI
+-----------------
 
 Paralleles HDF5 wird von ``h5py`` nicht unterstützt.
 
@@ -151,6 +169,12 @@ Ein Dataset kann wachsen::
   ds.resize(20, axis=0)
   print(ds.shape) # 20x1024
 
+Das kürzt-mögliche Tutorial
+---------------------------
+
+Von User DyneTrekk aus #scipy auf FreeNode::
+
+  h5py.File('foo.h5')['folder/dataset'] = np.linspace(0, 10)
 
 Links und Quellen
 =================
