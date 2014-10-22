@@ -71,7 +71,9 @@ Dataset erzeugen
   ds = f.create_dataset(name, shape=None, dtype=None, data=None)
 
 erzeugt ein neues Dataset. Entweder ``data`` oder ``shape`` müssen angegeben
-werden.
+werden. Alternativ geht eine dictionary-artige Syntax::
+
+  f["some_name"] = some_data
 
 Daten zuweisen
 --------------
@@ -82,6 +84,12 @@ Zuweisen geht dann beispielsweise über
 
   ds = f.create_dataset(name, shape=(200,200))
   ds[5,:] = rand(200)
+
+oder wie oben beschrieben mit
+
+::
+
+  f["name"] = rand(200)
 
 Daten lesen
 -----------
