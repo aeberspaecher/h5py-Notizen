@@ -121,10 +121,10 @@ Gruppen erzeugen
 
   gruppe = f.create_group("GruppenName")
 
-Namen und Parent auslesen::
+Eine Gruppe kann Untergruppen enthalten. Namen und Parent auslesen::
 
-  print("gruppe.name")
-  print("gruppe.parent")
+  print(gruppe.name)
+  print(gruppe.parent)
 
 Daten in einer Group erzeugen
 -----------------------------
@@ -132,7 +132,9 @@ Daten in einer Group erzeugen
 ::
 
   ds = gruppe.create_dataset("MehrDaten", data=array)
-  print("ds.name") # u"GruppenName/MehrDaten"
+  print(ds.name) # u"GruppenName/MehrDaten"
+
+Zugriff ist möglich etwa über ``data = file_obj["GruppenName/MehrDaten"]``.
 
 Attribute
 =========
@@ -177,8 +179,8 @@ Ein Dataset kann wachsen::
   ds.resize(20, axis=0)
   print(ds.shape) # 20x1024
 
-Das kürzt-mögliche Tutorial
----------------------------
+Das kürzest-mögliche Tutorial
+------------------------------
 
 Von User DyneTrekk aus #scipy auf FreeNode::
 
